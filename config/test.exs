@@ -6,5 +6,7 @@ config :github_watching, GithubWatchingWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :github_watching, gql_helper: GqlHelperBehaviourMock
+
 # Print only warnings and errors during test
 config :logger, level: :warn

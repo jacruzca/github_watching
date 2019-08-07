@@ -21,6 +21,8 @@ config :github_watching, GithubWatchingWeb.Endpoint,
     ]
   ]
 
+config :github_watching, gql_helper: GithubWatching.Helpers.GqlHelper
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

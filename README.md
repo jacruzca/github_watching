@@ -8,7 +8,7 @@
 - [x] Connect to Github API using GraphQL
 - [x] Domain modeling using structs
 - [x] Paginate results retrieved from API
-- [ ] Provide a way to test `github_api` without hitting the actual github api. (use this: https://medium.com/flatiron-labs/elixir-test-mocking-with-mox-b825a955143f)
+- [x] Provide a way to test `github_api` without hitting the actual github api. (use this: https://medium.com/flatiron-labs/elixir-test-mocking-with-mox-b825a955143f)
 - [ ] Create a page for taking a github username and display a list of watching repos
 - [ ] Each retrieved repo should redirect to its github location
 - [ ] Bonus: Deploy to Heroku

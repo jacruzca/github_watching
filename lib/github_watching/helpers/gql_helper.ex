@@ -2,6 +2,7 @@ defmodule GithubWatching.Helpers.GqlHelper do
   @moduledoc """
   GraphQL helper
   """
+  @behaviour GithubWatching.Helpers.GqlHelperBehaviour
 
   alias GithubWatching.Helpers.MapHelper
 

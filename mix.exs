@@ -39,7 +39,8 @@ defmodule GithubWatching.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:neuron, "~> 2.0.0"}
+      {:neuron, "~> 2.0.0"},
+      {:mox, "~> 0.5.1", only: :test}
     ]
   end
 end

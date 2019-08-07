@@ -5,7 +5,6 @@ defmodule GithubWatching.GithubApi do
 
   import Logger
   alias GithubWatching.WatchingParams
-  alias GithubWatching.Helpers.GqlHelper
   alias GithubWatching.Domain.User
 
   @user_fields """
@@ -18,6 +17,8 @@ defmodule GithubWatching.GithubApi do
     url
   """
 
+  defp gql_helper, do: Application.get_env(:github_watching, :gql_helper)
+
   @doc """
   Return a list of paginated repositories that the given user is watching
   """
@@ -29,7 +30,7 @@ defmodule GithubWatching.GithubApi do
     watching_params = params |> WatchingParams.build_watching_params()
 
     query =
-      GqlHelper.query("""
+      gql_helper().query("""
       {
         user(login:"#{username}"){
           #{@user_fields}
@@ -51,6 +52,7 @@ defmodule GithubWatching.GithubApi do
       """)
 
     case query do
+      {:ok, %{user: nil}} -> {:error, :user_not_found}
       {:ok, %{user: user}} -> {:ok, User |> struct(user)}
       error -> error
     end
