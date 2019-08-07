@@ -4,11 +4,13 @@ defmodule GithubWatching.GithubApi do
   """
 
   import Logger
+  alias GithubWatching.WatchingParams
+  alias GithubWatching.Helpers.GqlHelper
+  alias GithubWatching.Domain.User
 
   @user_fields """
-    email
-    id
     name
+    login
   """
 
   @repository_fields """
@@ -16,40 +18,43 @@ defmodule GithubWatching.GithubApi do
     url
   """
 
-  defp api_key, do: Application.get_env(:github_watching, :api_key)
-  defp endpoint, do: Application.get_env(:github_watching, :endpoint)
+  @doc """
+  Return a list of paginated repositories that the given user is watching
+  """
+  @spec get_watching_repositories(String.t(), WatchingParams.t()) ::
+          {:ok, User.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
+  def get_watching_repositories(username, params \\ %WatchingParams{}) do
+    debug("Getting watching repos for user `#{username}` with params #{inspect(params)}")
 
-  defp init() do
-    Neuron.Config.set(url: endpoint())
+    watching_params = params |> WatchingParams.build_watching_params()
 
-    Neuron.Config.set(
-      headers: [
-        Authorization: "Bearer #{api_key()}"
-      ]
-    )
-  end
-
-  defp query(body) do
-    init()
-    body |> Neuron.query()
-  end
-
-  @spec get_watching_repositories(String.t()) ::
-          {:ok, Neuron.Response.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
-  def get_watching_repositories(username) do
-    debug("Getting watching repos for user #{username}")
-
-    query("""
-    {
-      user(login:"#{username}"){
-        #{@user_fields}
-        watching(first: 10){
-          nodes{
-            #{@repository_fields}
+    query =
+      GqlHelper.query("""
+      {
+        user(login:"#{username}"){
+          #{@user_fields}
+          watching(#{watching_params}){
+            totalCount
+            pageInfo{
+              endCursor
+              hasNextPage
+            }
+            edges{
+              node{
+                #{@repository_fields}
+              }
+              cursor
+            }
           }
         }
       }
-    }
-    """)
+      """)
+
+    IO.inspect("buu9999")
+
+    case query do
+      {:ok, %{user: user}} -> {:ok, User |> struct(user)}
+      error -> error
+    end
   end
 end
