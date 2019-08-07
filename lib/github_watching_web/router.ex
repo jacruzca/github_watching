@@ -19,6 +19,13 @@ defmodule GithubWatchingWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/watching", GithubWatchingWeb.Controllers.Watching do
+    pipe_through :browser
+
+    get "/", WatchingController, :index
+    post "/", WatchingController, :search
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GithubWatchingWeb do
   #   pipe_through :api

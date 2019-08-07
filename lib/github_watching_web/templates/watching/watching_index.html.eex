@@ -1,0 +1,27 @@
+<%= form_for @conn, Routes.watching_path(@conn, :index), fn f -> %>
+  <label>
+    Username: <%= text_input f, :username %>
+  </label>
+
+  <%= submit "Submit" %>
+<% end %>
+<%= if @user != nil do %>
+    <section >
+        <h1>User information</h1>
+        <ul>
+        <li><b>Name:</b> <%= @user.name %></li> 
+        <li><b>Username:</b> <%= @user.login %></li> 
+        </ul>
+    </section>
+    <section >
+        <h1>Currently watching</h1>
+        <ol>
+            <%= for {repo, i} <- Enum.with_index(@user.watching.edges) do %>
+            <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a></li>
+            <% end %>
+        </ol>
+        <%= if @user.watching.pageInfo.hasNextPage do %>
+                <%= submit "Load more" %>
+        <% end %>
+    </section>
+<% end %>
