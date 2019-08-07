@@ -4,7 +4,8 @@
 
 - [x] Initial Phoenix project
 - [x] Keep GitHub API Key in a environment variable and read it from mix config.
-- [ ] Create separate module called `github_api` to interact with GitHub API
+- [x] Create separate module called `github_api` to interact with GitHub API
+- [x] Connect to Github API using GraphQL
 - [ ] Provide a way to test `github_api` without hitting the actual github api. (use this: https://medium.com/flatiron-labs/elixir-test-mocking-with-mox-b825a955143f)
 - [ ] Create a page for taking a github username and display a list of watching repos
 - [ ] Each retrieved repo should redirect to its github location
