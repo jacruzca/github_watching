@@ -6,9 +6,11 @@ defmodule GithubWatching.Domain.Repository do
 
   @type t :: %Repository{
           name: String.t(),
-          url: String.t()
+          url: String.t(),
+          createdAt: DateTime.t()
         }
 
   defstruct name: nil,
-            url: nil
+            url: nil,
+            createdAt: nil
 end

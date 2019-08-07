@@ -9,11 +9,15 @@
 - [x] Domain modeling using structs
 - [x] Paginate results retrieved from API
 - [x] Provide a way to test `github_api` without hitting the actual github api. (use this: https://medium.com/flatiron-labs/elixir-test-mocking-with-mox-b825a955143f)
-- [ ] Create a page for taking a github username and display a list of watching repos
-- [ ] Each retrieved repo should redirect to its github location
+- [x] Create a page for taking a github username and display a list of watching repos
+- [x] Each retrieved repo should redirect to its github location
+- [ ] Bonus: Display starred repos
+- [ ] Bonus: Display more info about the user
 - [ ] Bonus: Deploy to Heroku
 
 ## How to run it
+
+Make sure you set the following environment variable in yous sytem: `GITHUB_WATCHING_KEY`. Its value must be the github api key with appropiate scopes
 
 To start your Phoenix server:
 
@@ -22,6 +26,11 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Testing it
+
+Run:
+  - `mix test`
 
 
 ## Problems

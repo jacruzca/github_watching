@@ -13,15 +13,31 @@
         <li><b>Username:</b> <%= @user.login %></li> 
         </ul>
     </section>
-    <section >
-        <h1>Currently watching</h1>
-        <ol>
+    <section class="buttons-wrapper">
+        <h1>Currently watching (<%= @user.watching.totalCount %>)</h1>
+        <ul>
             <%= for {repo, i} <- Enum.with_index(@user.watching.edges) do %>
-            <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a></li>
+            <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a> (<%= repo.node.createdAt %>)</li>
             <% end %>
-        </ol>
-        <%= if @user.watching.pageInfo.hasNextPage do %>
-                <%= submit "Load more" %>
+        </ul>
+        <div class="button-first">
+        <%= if @user.watching.pageInfo.hasPreviousPage do %>
+            <%= form_for @conn, Routes.watching_path(@conn, :index), fn f -> %>
+                <%= hidden_input f, :before_cursor, value: @user.watching.pageInfo.startCursor %>
+                <%= hidden_input f, :username, value: @user.login %>
+                <%= submit "<< Previous page" %>
+            <% end %>
         <% end %>
+        </div>
+        <div class="button-second">
+        <%= if @user.watching.pageInfo.hasNextPage do %>
+            <%= form_for @conn, Routes.watching_path(@conn, :index), fn f -> %>
+                <%= hidden_input f, :cursor, value: @user.watching.pageInfo.endCursor %>
+                <%= hidden_input f, :username, value: @user.login %>
+                <%= submit "Next page >>" %>
+            <% end %>
+        <% end %>
+        </div>
+        
     </section>
 <% end %>

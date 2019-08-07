@@ -15,6 +15,7 @@ defmodule GithubWatching.GithubApi do
   @repository_fields """
     name
     url
+    createdAt
   """
 
   defp gql_helper, do: Application.get_env(:github_watching, :gql_helper)
@@ -38,7 +39,9 @@ defmodule GithubWatching.GithubApi do
             totalCount
             pageInfo{
               endCursor
+              startCursor
               hasNextPage
+              hasPreviousPage
             }
             edges{
               node{

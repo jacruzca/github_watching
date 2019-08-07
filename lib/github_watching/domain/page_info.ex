@@ -3,9 +3,13 @@ defmodule GithubWatching.Domain.PageInfo do
 
   @type t :: %PageInfo{
           endCursor: String.t(),
-          hasNextPage: boolean()
+          startCursor: String.t(),
+          hasNextPage: boolean(),
+          hasPreviousPage: boolean()
         }
 
   defstruct endCursor: nil,
-            hasNextPage: nil
+            startCursor: nil,
+            hasNextPage: nil,
+            hasPreviousPage: nil
 end

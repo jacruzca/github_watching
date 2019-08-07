@@ -20,11 +20,23 @@ defmodule GithubWatchingWeb.Controllers.Watching.WatchingController do
     debug("search with params #{inspect(params)}")
     assigns = @default_assigns
 
-    IO.inspect("Olv values:")
-    IO.inspect(conn)
-
     assigns =
       case GithubApi.get_watching_repositories(username, %WatchingParams{after_cursor: cursor}) do
+        {:ok, user} -> %{assigns | user: user}
+        {:error, error} -> %{assigns | error: error}
+      end
+
+    %{conn | assigns: Map.merge(conn.assigns, assigns)}
+    |> put_view(WatchingView)
+    |> render("watching_index.html")
+  end
+
+  def search(conn, %{"username" => username, "before_cursor" => cursor} = params) do
+    debug("search with params #{inspect(params)}")
+    assigns = @default_assigns
+
+    assigns =
+      case GithubApi.get_watching_repositories(username, %WatchingParams{before_cursor: cursor}) do
         {:ok, user} -> %{assigns | user: user}
         {:error, error} -> %{assigns | error: error}
       end
