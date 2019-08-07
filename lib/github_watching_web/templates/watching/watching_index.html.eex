@@ -11,7 +11,7 @@
     <section class="buttons-wrapper">
         <h1>Currently watching (<%= @user.watching.totalCount %>)</h1>
         <ul>
-            <%= for {repo, i} <- Enum.with_index(@user.watching.edges) do %>
+            <%= for {repo, _i} <- Enum.with_index(@user.watching.edges) do %>
             <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a> (<%= repo.node.createdAt %>)</li>
             <% end %>
         </ul>
