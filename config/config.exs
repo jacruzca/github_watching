@@ -14,6 +14,8 @@ config :github_watching, GithubWatchingWeb.Endpoint,
   render_errors: [view: GithubWatchingWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: GithubWatching.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :github_watching, api_key: System.get_env("GITHUB_WATCHING_KEY")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
