@@ -1,0 +1,16 @@
+<section >
+    <h1>User information</h1>
+    <img width="120" src="<%= @user.avatarUrl %>"/>
+    <ul>
+    <li><b>Name:</b> <%= @user.name %></li> 
+    <li><b>Username:</b> <%= @user.login %></li> 
+    <%= if @user.bioHTML != nil do %>
+    <li><b>Bio:</b> <%= @user.bioHTML %></li>   
+    <% end %>
+    <%= if @user.company != nil do %>
+    <li><b>Company:</b> <%= @user.company %></li>   
+    <% end %>
+    <li><b>Followers:</b> <%= @user.followers.totalCount %></li> 
+    <li><b>Gists:</b> <%= @user.gists.totalCount %></li> 
+    </ul>
+</section>

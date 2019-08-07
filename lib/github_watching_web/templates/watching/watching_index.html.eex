@@ -7,13 +7,7 @@
   <%= submit "Submit" %>
 <% end %>
 <%= if @user != nil do %>
-    <section >
-        <h1>User information</h1>
-        <ul>
-        <li><b>Name:</b> <%= @user.name %></li> 
-        <li><b>Username:</b> <%= @user.login %></li> 
-        </ul>
-    </section>
+    <%= render(GithubWatchingWeb.PageView, "user_info.html", user: @user) %>
     <section class="buttons-wrapper">
         <h1>Currently watching (<%= @user.watching.totalCount %>)</h1>
         <ul>

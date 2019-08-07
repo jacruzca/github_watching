@@ -10,6 +10,15 @@ defmodule GithubWatching.GithubApi do
   @user_fields """
     name
     login
+    avatarUrl
+    bioHTML
+    company
+    followers{
+      totalCount
+    }
+    gists{
+      totalCount
+    }
   """
 
   @repository_fields """

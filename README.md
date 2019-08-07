@@ -12,7 +12,7 @@
 - [x] Create a page for taking a github username and display a list of watching repos
 - [x] Each retrieved repo should redirect to its github location
 - [x] Bonus: Display starred repos
-- [ ] Bonus: Display more info about the user
+- [x] Bonus: Display more info about the user
 - [x] Bonus: Deploy to Heroku
 
 ## How to run it
