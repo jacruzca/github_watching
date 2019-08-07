@@ -50,8 +50,6 @@ defmodule GithubWatching.GithubApi do
       }
       """)
 
-    IO.inspect("buu9999")
-
     case query do
       {:ok, %{user: user}} -> {:ok, User |> struct(user)}
       error -> error
