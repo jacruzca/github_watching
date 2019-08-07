@@ -7,9 +7,11 @@ defmodule GithubWatching.Domain.WatchingRepository do
 
   @type t :: %WatchingRepository{
           cursor: String.t(),
-          node: Repository.t()
+          node: Repository.t(),
+          starredAt: DateTime.t()
         }
 
   defstruct cursor: nil,
-            node: nil
+            node: nil,
+            starredAt: nil
 end

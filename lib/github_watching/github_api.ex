@@ -90,6 +90,7 @@ defmodule GithubWatching.GithubApi do
                 #{@repository_fields}
               }
               cursor
+              starredAt
             }
           }
         }

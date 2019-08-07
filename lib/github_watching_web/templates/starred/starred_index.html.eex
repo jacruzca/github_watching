@@ -18,7 +18,7 @@
         <h1>Starred Repos (<%= @user.starredRepositories.totalCount %>)</h1>
         <ul>
             <%= for {repo, i} <- Enum.with_index(@user.starredRepositories.edges) do %>
-            <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a> (<%= repo.node.createdAt %>)</li>
+            <li><a target="_blank" href="<%= repo.node.url %>"><%= repo.node.name %></a> (<%= repo.starredAt %>)</li>
             <% end %>
         </ul>
         <div class="button-first">
