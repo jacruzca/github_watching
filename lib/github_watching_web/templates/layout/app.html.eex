@@ -13,7 +13,7 @@
         <nav role="navigation">
           <ul>
             <li><a href="/watching">Watching</a></li>
-            <li><a href="/stars">Stars</a></li>
+            <li><a href="/starred">Starred</a></li>
           </ul>
         </nav>
         <h1>Github Watching</h1>

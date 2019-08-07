@@ -8,10 +8,12 @@ defmodule GithubWatching.Domain.User do
   @type t :: %User{
           name: String.t(),
           login: String.t(),
-          watching: WatchingObject.t()
+          watching: WatchingObject.t(),
+          starredRepositories: WatchingObject.t()
         }
 
   defstruct name: nil,
             login: nil,
-            watching: []
+            watching: [],
+            starredRepositories: []
 end

@@ -26,6 +26,13 @@ defmodule GithubWatchingWeb.Router do
     post "/", WatchingController, :search
   end
 
+  scope "/starred", GithubWatchingWeb.Controllers.Starred do
+    pipe_through :browser
+
+    get "/", StarredController, :index
+    post "/", StarredController, :search
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", GithubWatchingWeb do
   #   pipe_through :api

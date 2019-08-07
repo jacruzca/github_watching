@@ -11,7 +11,7 @@
 - [x] Provide a way to test `github_api` without hitting the actual github api. (use this: https://medium.com/flatiron-labs/elixir-test-mocking-with-mox-b825a955143f)
 - [x] Create a page for taking a github username and display a list of watching repos
 - [x] Each retrieved repo should redirect to its github location
-- [ ] Bonus: Display starred repos
+- [x] Bonus: Display starred repos
 - [ ] Bonus: Display more info about the user
 - [x] Bonus: Deploy to Heroku
 
@@ -37,8 +37,9 @@ Run:
 Go here: [`https://polar-ravine-36455.herokuapp.com/`](https://polar-ravine-36455.herokuapp.com/)
 
 
-## Problems
+## Problems and lessons
 
 The following is the list of problems I've found developing this:
 
 - I still struggle creating specs. I don't understand some error that ElixirLS Dialyzer throws. I don't know if it's my code or VSCode tooling.
+- I learned how to mock modules for testing. It was easier than I thought using `mox`

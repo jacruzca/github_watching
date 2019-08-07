@@ -6,7 +6,7 @@
         <a href="/watching">See watching repos by username</a>
       </li>
       <li>
-        <a href="/star">See starred repos by username</a>
+        <a href="/starred">See starred repos by username</a>
       </li>
     </ul>
   </article>

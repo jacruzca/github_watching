@@ -1,8 +1,8 @@
-defmodule GithubWatchingWeb.Controllers.Watching.WatchingController do
+defmodule GithubWatchingWeb.Controllers.Starred.StarredController do
   use GithubWatchingWeb, :controller
 
   import Logger
-  alias GithubWatchingWeb.Views.Watching.WatchingView
+  alias GithubWatchingWeb.Views.Starred.StarredView
   alias GithubWatching.WatchingParams
   alias GithubWatching.GithubApi
 
@@ -12,8 +12,8 @@ defmodule GithubWatchingWeb.Controllers.Watching.WatchingController do
     assigns = @default_assigns
 
     %{conn | assigns: Map.merge(conn.assigns, assigns)}
-    |> put_view(WatchingView)
-    |> render("watching_index.html")
+    |> put_view(StarredView)
+    |> render("starred_index.html")
   end
 
   def search(conn, %{"username" => username, "cursor" => cursor}) do
@@ -32,15 +32,18 @@ defmodule GithubWatchingWeb.Controllers.Watching.WatchingController do
     debug("search with params #{inspect(params)}")
     assigns = @default_assigns
 
+    ## improve this later
+    params = %{params | order_by: "{field: STARRED_AT, direction: ASC}"}
+
     assigns =
-      case GithubApi.get_watching_repositories(username, params) do
+      case GithubApi.get_starred_repositories(username, params) do
         {:ok, user} -> %{assigns | user: user}
         {:error, :user_not_found} -> %{assigns | error: "User not found. Try with other username"}
         {:error, error} -> %{assigns | error: error}
       end
 
     %{conn | assigns: Map.merge(conn.assigns, assigns)}
-    |> put_view(WatchingView)
-    |> render("watching_index.html")
+    |> put_view(StarredView)
+    |> render("starred_index.html")
   end
 end

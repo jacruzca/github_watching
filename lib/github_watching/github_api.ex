@@ -18,6 +18,13 @@ defmodule GithubWatching.GithubApi do
     createdAt
   """
 
+  @page_info_fields """
+    endCursor
+    startCursor
+    hasNextPage
+    hasPreviousPage
+  """
+
   defp gql_helper, do: Application.get_env(:github_watching, :gql_helper)
 
   @doc """
@@ -38,10 +45,45 @@ defmodule GithubWatching.GithubApi do
           watching(#{watching_params}){
             totalCount
             pageInfo{
-              endCursor
-              startCursor
-              hasNextPage
-              hasPreviousPage
+              #{@page_info_fields}
+            }
+            edges{
+              node{
+                #{@repository_fields}
+              }
+              cursor
+            }
+          }
+        }
+      }
+      """)
+
+    case query do
+      {:ok, %{user: nil}} -> {:error, :user_not_found}
+      {:ok, %{user: user}} -> {:ok, User |> struct(user)}
+      error -> error
+    end
+  end
+
+  @spec get_starred_repositories(String.t(), WatchingParams.t()) ::
+          {:ok, User.t()} | {:error, Neuron.Response.t() | Neuron.JSONParseError.t()}
+  def get_starred_repositories(
+        username,
+        params \\ %WatchingParams{order_by: "{field: STARRED_AT, direction: ASC}"}
+      ) do
+    debug("Getting starred repos for user `#{username}` with params #{inspect(params)}")
+
+    watching_params = params |> WatchingParams.build_watching_params()
+
+    query =
+      gql_helper().query("""
+      {
+        user(login:"#{username}"){
+          #{@user_fields}
+          starredRepositories(#{watching_params}){
+            totalCount
+            pageInfo{
+              #{@page_info_fields}
             }
             edges{
               node{
