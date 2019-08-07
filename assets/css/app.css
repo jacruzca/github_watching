@@ -12,4 +12,18 @@
 .button-second {
   overflow: hidden; /* if you don't want #second to wrap below #first */
 }
-    
+
+.code-w {
+  width: 100%;
+  padding: 100px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.code-w a {
+  width: 100%;
+  color: 'red';
+  font-size: 20px;
+  display: inline-block;
+  text-align: center;
+}
