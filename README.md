@@ -13,7 +13,7 @@
 - [x] Each retrieved repo should redirect to its github location
 - [ ] Bonus: Display starred repos
 - [ ] Bonus: Display more info about the user
-- [ ] Bonus: Deploy to Heroku
+- [x] Bonus: Deploy to Heroku
 
 ## How to run it
 

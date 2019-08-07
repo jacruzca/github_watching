@@ -35,6 +35,7 @@ defmodule GithubWatchingWeb.Controllers.Watching.WatchingController do
     assigns =
       case GithubApi.get_watching_repositories(username, params) do
         {:ok, user} -> %{assigns | user: user}
+        {:error, :user_not_found} -> %{assigns | error: "User not found. Try with other username"}
         {:error, error} -> %{assigns | error: error}
       end
 

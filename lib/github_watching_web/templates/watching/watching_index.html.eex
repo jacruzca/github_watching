@@ -41,3 +41,6 @@
         
     </section>
 <% end %>
+<%= if @error != nil do %>
+    <div class="alert-danger"><%= @error %></div>
+<% end %>
